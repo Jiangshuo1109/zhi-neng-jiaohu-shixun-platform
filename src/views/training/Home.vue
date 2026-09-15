@@ -5,7 +5,6 @@
       <div class="page-card card" v-for="c in cards" :key="c.to" @click="$router.push(c.to)">
         <h3>{{ c.title }}</h3>
         <p class="muted">{{ c.desc }}</p>
-        <el-tag v-if="c.tag" size="small" type="warning">{{ c.tag }}</el-tag>
       </div>
     </div>
   </div>
@@ -25,15 +24,15 @@ const cards = computed(() => {
     ]
   }
   return [
-    { title: '在线学生', desc: '状态列表与一键进入协作', to: '/training/online', tag: '#' },
+    { title: '在线学生', desc: '状态列表与一键进入协作', to: '/training/online' },
     { title: '实时画面', desc: '工位画面总览', to: '/training/live' },
-    { title: '远程协作', desc: '双向语音、冻屏、激光笔、共享', to: '/training/collab', tag: '▲/#' },
-    { title: '历史回看', desc: '过程记录与画面快照', to: '/training/history', tag: '▲' },
-    { title: '报告模板', desc: '实验报告模板配置', to: '/training/templates', tag: '▲' },
-    { title: '分组教学', desc: '联系人分组与分组授课', to: '/training/groups', tag: '#' },
-    { title: '教学分享', desc: '快速/预约/长期 + 链接二维码', to: '/training/share', tag: '#' },
+    { title: '远程协作', desc: '双向语音、冻屏、激光笔、共享', to: '/training/collab' },
+    { title: '历史回看', desc: '过程记录与画面快照', to: '/training/history' },
+    { title: '报告模板', desc: '实验报告模板配置', to: '/training/templates' },
+    { title: '分组教学', desc: '联系人分组与分组授课', to: '/training/groups' },
+    { title: '教学分享', desc: '快速/预约/长期 + 链接二维码', to: '/training/share' },
     { title: '任务安排', desc: '地点/时长/班级下发', to: '/training/assign' },
-    { title: '批阅评分', desc: '人工批阅 + AI 自动评分', to: '/training/scoring', tag: '▲' },
+    { title: '批阅评分', desc: '人工批阅 + AI 自动评分', to: '/training/scoring' },
     { title: '我的任务', desc: '查看已下发任务与报告', to: '/training/tasks' },
   ]
 })

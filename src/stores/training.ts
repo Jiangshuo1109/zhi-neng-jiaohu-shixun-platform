@@ -152,15 +152,17 @@ export const useTrainingStore = defineStore('training', () => {
   }
 
   function addFreezeMarker(x: number, y: number) {
-    if (!freezeOn.value) return
+    if (!freezeOn.value) return null
+    const n = freezeMarkers.value.length + 1
     const m: FreezeMarker = {
       id: `m${Date.now()}`,
       x,
       y,
-      note: `标记 ${freezeMarkers.value.length + 1}`,
+      note: `#${n}`,
     }
     freezeMarkers.value.push(m)
-    annotations.value.unshift(`冻屏标记点 (${Math.round(x)}%, ${Math.round(y)}%)`)
+    annotations.value.unshift(`冻屏落点 #${n} (${Math.round(x)}%, ${Math.round(y)}%)`)
+    return m
   }
 
   function clearFreezeMarkers() {

@@ -6,18 +6,32 @@
     </div>
     <el-row :gutter="12">
       <el-col :xs="24" :sm="12" :md="8" v-for="s in training.shares" :key="s.id">
-        <el-card shadow="hover" style="margin-bottom: 12px">
+        <el-card shadow="hover" class="share-card">
           <div class="toolbar" style="margin-bottom: 8px">
-            <el-tag>{{ s.type }}</el-tag>
+            <el-tag :type="s.type === '快速' ? 'success' : s.type === '预约' ? 'warning' : 'info'">{{ s.type }}</el-tag>
             <span class="muted">到期 {{ s.expire }}</span>
           </div>
           <h3 style="margin: 0 0 8px">{{ s.title }}</h3>
-          <p class="link">{{ s.link }}</p>
-          <div class="qr">
-            <div class="qr-box">QR</div>
-            <span class="muted">{{ s.qrHint }}</span>
+          <div class="link-row">
+            <el-input :model-value="s.link" readonly>
+              <template #append>
+                <el-button @click="copy(s.link)">复制</el-button>
+              </template>
+            </el-input>
           </div>
-          <el-button size="small" @click="copy(s.link)">复制链接</el-button>
+          <div class="qr">
+            <img
+              class="qr-img"
+              :src="qrUrl(s.link)"
+              :alt="`二维码 ${s.title}`"
+              width="180"
+              height="180"
+            />
+            <div class="qr-meta">
+              <span class="muted">{{ s.qrHint }}</span>
+              <el-button size="small" type="primary" plain @click="copy(s.link)">复制分享链接</el-button>
+            </div>
+          </div>
         </el-card>
       </el-col>
     </el-row>
@@ -51,40 +65,52 @@ const training = useTrainingStore()
 const visible = ref(false)
 const form = reactive<{ type: TeachingShare['type']; title: string }>({ type: '快速', title: '' })
 
+function qrUrl(link: string) {
+  return `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(link)}`
+}
+
 function save() {
   if (!form.title) return ElMessage.warning('请填写标题')
   training.addShare(form.type, form.title)
   visible.value = false
-  ElMessage.success('已生成分享入口')
+  ElMessage.success('已生成分享链接与二维码')
 }
 
-function copy(link: string) {
-  navigator.clipboard?.writeText(link)
-  ElMessage.success('链接已复制')
+async function copy(link: string) {
+  try {
+    await navigator.clipboard?.writeText(link)
+    ElMessage.success('分享链接已复制')
+  } catch {
+    ElMessage.success(`链接：${link}`)
+  }
 }
 </script>
 
 <style scoped>
-.link {
-  font-size: 12px;
-  word-break: break-all;
-  color: #1F4B99;
+.share-card {
+  margin-bottom: 12px;
+}
+.link-row {
+  margin-bottom: 12px;
 }
 .qr {
   display: flex;
   align-items: center;
-  gap: 12px;
-  margin: 12px 0;
+  gap: 16px;
+  margin: 8px 0 0;
+  flex-wrap: wrap;
 }
-.qr-box {
-  width: 72px;
-  height: 72px;
-  border: 2px solid #1F4B99;
+.qr-img {
+  width: 180px;
+  height: 180px;
+  border: 1px solid #E5E7EB;
+  border-radius: 8px;
+  background: #fff;
+  object-fit: contain;
+}
+.qr-meta {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: #1F4B99;
-  background: repeating-conic-gradient(#1F4B99 0% 25%, #fff 0% 50%) 50% / 12px 12px;
+  flex-direction: column;
+  gap: 10px;
 }
 </style>

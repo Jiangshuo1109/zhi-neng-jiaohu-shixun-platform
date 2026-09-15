@@ -30,6 +30,13 @@ export const useBookingStore = defineStore('booking', () => {
     rules.value = rules.value.filter((r) => r.id !== id)
   }
 
+  function duplicateRule(id: string) {
+    const src = rules.value.find((r) => r.id === id)
+    if (!src) return
+    const copy = { ...src, id: `rule${Date.now()}`, labName: `${src.labName}（副本）`, enabled: false }
+    rules.value.unshift(copy)
+  }
+
   function applyBooking(payload: {
     labId: string
     labName: string
@@ -129,5 +136,5 @@ export const useBookingStore = defineStore('booking', () => {
     records.value = clone(seedRecords)
   }
 
-  return { rules, records, addRule, updateRule, removeRule, applyBooking, audit, reset }
+  return { rules, records, addRule, updateRule, removeRule, duplicateRule, applyBooking, audit, reset }
 })
