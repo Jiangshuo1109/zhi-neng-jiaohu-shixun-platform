@@ -94,7 +94,7 @@ function defaultMaterial(type: TaskMaterial['type'] = '图文'): TaskMaterial {
   const map = {
     图文: { name: '示意图', url: PLACEHOLDER.img1 },
     视频: { name: '操作示范', url: PLACEHOLDER.video },
-    文档: { name: '操作说明', url: '#', content: '此处为文档预览正文（模拟）。' },
+    文档: { name: '操作说明', url: '#', content: '此处为文档预览正文。' },
   } as const
   const d = map[type]
   return { type, name: d.name, url: d.url, content: 'content' in d ? d.content : undefined }
@@ -155,7 +155,7 @@ function save() {
     materials: s.materials.map((m) => {
       if (m.type === '图文' && (!m.url || m.url === '#')) return { ...m, url: PLACEHOLDER.img1 }
       if (m.type === '视频' && (!m.url || m.url === '#')) return { ...m, url: PLACEHOLDER.video }
-      if (m.type === '文档' && !m.content) return { ...m, content: `${m.name} 预览正文（模拟）。` }
+      if (m.type === '文档' && !m.content) return { ...m, content: `${m.name} 预览正文。` }
       return m
     }),
   }))

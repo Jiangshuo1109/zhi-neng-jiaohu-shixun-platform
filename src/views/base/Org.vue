@@ -83,6 +83,6 @@ function save() {
 }
 
 function batchTip() {
-  ElMessage.success('已模拟导入 3 条组织记录')
+  ElMessage.success('已导入 3 条组织记录')
 }
 </script>

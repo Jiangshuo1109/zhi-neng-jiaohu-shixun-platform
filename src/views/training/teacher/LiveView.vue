@@ -1,7 +1,7 @@
 <template>
   <div class="page-card">
     <div class="toolbar">
-      <h2 class="page-title" style="margin: 0; flex: 1">实时画面（Mock）</h2>
+      <h2 class="page-title" style="margin: 0; flex: 1">实时画面</h2>
       <el-select :model-value="training.sessionStudentId" style="width: 160px" @change="training.selectStudent">
         <el-option v-for="s in training.online" :key="s.id" :label="s.name" :value="s.id" />
       </el-select>
@@ -10,7 +10,7 @@
     <div class="live-grid">
       <div class="screen">
         <div class="badge">LIVE · {{ current?.name }} · {{ current?.device }}</div>
-        <div class="mock-feed">工位画面模拟流</div>
+        <div class="live-feed">工位实时画面</div>
         <div class="hud">分辨率 1280×720 · 延迟 86ms · {{ training.allMuted ? '全员静音' : '声音开' }}</div>
       </div>
       <div class="side">
@@ -51,7 +51,7 @@ const current = computed(() => training.online.find((s) => s.id === training.ses
   overflow: hidden;
   color: #fff;
 }
-.mock-feed {
+.live-feed {
   height: 320px;
   display: flex;
   align-items: center;

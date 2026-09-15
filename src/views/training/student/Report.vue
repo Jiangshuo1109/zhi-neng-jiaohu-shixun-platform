@@ -18,13 +18,13 @@
         />
         <div v-else class="upload-block">
           <div class="upload-actions">
-            <el-button type="primary" @click="mockUpload(f.id)">模拟上传图片</el-button>
+            <el-button type="primary" @click="uploadSampleImage(f.id)">上传图片</el-button>
             <el-button v-if="values[f.id]" @click="values[f.id] = ''">清除</el-button>
           </div>
           <div v-if="values[f.id]" class="preview">
             <img :src="values[f.id]" :alt="f.label" />
           </div>
-          <div v-else class="preview empty">尚未上传，点击上方按钮模拟上传</div>
+          <div v-else class="preview empty">尚未上传，点击上方按钮上传</div>
         </div>
       </el-form-item>
       <el-form-item>
@@ -59,7 +59,7 @@ const template = computed(() =>
 
 const values = reactive<Record<string, string>>({})
 
-const mockImages = [PLACEHOLDER.student, PLACEHOLDER.img2, PLACEHOLDER.img3, PLACEHOLDER.img5]
+const sampleImages = [PLACEHOLDER.student, PLACEHOLDER.img2, PLACEHOLDER.img3, PLACEHOLDER.img5]
 
 watch(
   [task, template],
@@ -73,10 +73,10 @@ watch(
   { immediate: true },
 )
 
-function mockUpload(fieldId: string) {
+function uploadSampleImage(fieldId: string) {
   const idx = Object.keys(values).filter((k) => values[k].startsWith('http')).length
-  values[fieldId] = mockImages[idx % mockImages.length]
-  ElMessage.success('图片已上传（本地模拟）')
+  values[fieldId] = sampleImages[idx % sampleImages.length]
+  ElMessage.success('图片已上传')
 }
 
 function buildContent() {

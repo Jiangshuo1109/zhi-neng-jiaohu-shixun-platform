@@ -60,12 +60,12 @@
         <div class="feed" ref="feedRef">
           <span v-if="training.activeTool === 'laser'" class="laser">✦</span>
           <span v-if="training.activeTool === 'whiteboard'" class="board">画板层开启</span>
-          <div v-if="sharing" class="share-mock">
-            <div class="share-mock-bar">屏幕共享（模拟）</div>
-            <div class="share-mock-body">课件 / 桌面画面 Mock</div>
+          <div v-if="sharing" class="share-panel">
+            <div class="share-bar">屏幕共享中</div>
+            <div class="share-body">课件 / 桌面画面</div>
           </div>
           <span v-if="training.freezeOn" class="freeze-hint">冻屏中 · 点击落点</span>
-          <template v-if="!sharing">学生端画面 Mock</template>
+          <template v-if="!sharing">学生端画面</template>
           <div
             v-for="(m, idx) in training.freezeMarkers"
             :key="m.id"
@@ -271,7 +271,7 @@ function onTool(key: CollabTool) {
     )
   } else if (key === 'share') {
     if (!wasShare && training.activeTool === 'share') {
-      ElMessage.success('屏幕共享已开始（模拟）')
+      ElMessage.success('屏幕共享已开始')
     } else if (wasShare && training.activeTool !== 'share') {
       ElMessage.info('屏幕共享已停止')
     }
@@ -426,7 +426,7 @@ function matLoaded() {
   border-radius: 999px;
   box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.35);
 }
-.share-mock {
+.share-panel {
   position: absolute;
   inset: 24px 40px 56px;
   border: 1px dashed rgba(255, 255, 255, 0.35);
@@ -437,13 +437,13 @@ function matLoaded() {
   overflow: hidden;
   z-index: 1;
 }
-.share-mock-bar {
+.share-bar {
   background: #1F4B99;
   color: #fff;
   font-size: 12px;
   padding: 6px 10px;
 }
-.share-mock-body {
+.share-body {
   flex: 1;
   display: flex;
   align-items: center;

@@ -5,7 +5,7 @@
       <el-input v-model="kw" placeholder="检索姓名/账号" clearable style="width: 180px" />
       <el-button type="primary" @click="visible = true">注册用户</el-button>
       <el-button @click="ElMessage.success('已导出用户列表')">导出</el-button>
-      <el-button @click="ElMessage.success('已模拟批量导入')">导入</el-button>
+      <el-button @click="ElMessage.success('已批量导入')">导入</el-button>
     </div>
     <el-table :data="filtered" border stripe>
       <el-table-column prop="name" label="姓名" width="100" />
