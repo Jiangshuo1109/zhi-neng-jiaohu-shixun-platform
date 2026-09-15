@@ -1,0 +1,89 @@
+:root {
+  --primary: #1F4B99;
+  --success: #0F766E;
+  --warning: #B45309;
+  --danger: #B91C1C;
+  --bg: #F5F7FA;
+  --card: #FFFFFF;
+  --text: #1F2937;
+  --text-secondary: #6B7280;
+  --border: #E5E7EB;
+  --el-color-primary: #1F4B99;
+  --el-color-primary-light-3: #4A6FB3;
+  --el-color-primary-light-5: #7796C6;
+  --el-color-primary-light-7: #A4BCD9;
+  --el-color-primary-light-8: #BBCDE3;
+  --el-color-primary-light-9: #D2DEEC;
+  --el-color-primary-dark-2: #193C7A;
+  --el-color-success: #0F766E;
+  --el-color-warning: #B45309;
+  --el-color-danger: #B91C1C;
+  font-family: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body, #app {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: var(--bg);
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.status-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.status-closed { background: #F3F4F6; color: #6B7280; }
+.status-expired { background: #F3F4F6; color: #9CA3AF; }
+.status-available { background: #CCFBF1; color: #0F766E; }
+.status-pending { background: #FEF3C7; color: #B45309; }
+.status-approved { background: #DBEAFE; color: #1F4B99; }
+.status-occupied { background: #FEE2E2; color: #B91C1C; }
+
+.page-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.page-title {
+  margin: 0 0 16px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.grid-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 12px;
+}
+
+.muted {
+  color: var(--text-secondary);
+  font-size: 13px;
+}
