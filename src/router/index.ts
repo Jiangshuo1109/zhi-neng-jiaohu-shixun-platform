@@ -9,6 +9,12 @@ const routes: RouteRecordRaw[] = [
     meta: { public: true },
   },
   {
+    path: '/join/:code',
+    name: 'join',
+    component: () => import('@/views/training/Join.vue'),
+    meta: { public: true, title: '进入教学' },
+  },
+  {
     path: '/',
     component: () => import('@/layouts/AppShell.vue'),
     redirect: '/workbench',

@@ -224,11 +224,12 @@ export const useTrainingStore = defineStore('training', () => {
 
   function addShare(type: TeachingShare['type'], title: string) {
     const code = Math.random().toString(36).slice(2, 6).toUpperCase()
+    const prefix = type === '快速' ? 'QK' : type === '预约' ? 'YY' : 'CQ'
     shares.value.unshift({
       id: `ts${Date.now()}`,
       type,
       title,
-      link: `https://lab.local/join/${type === '快速' ? 'QK' : type === '预约' ? 'YY' : 'CQ'}-${code}`,
+      link: `/join/${prefix}-${code}`,
       qrHint: `扫码加入${type}教学`,
       expire: type === '长期' ? '2026-12-31' : '今日 22:00',
     })

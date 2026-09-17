@@ -30,6 +30,8 @@
             <div class="qr-meta">
               <span class="muted">{{ s.qrHint }}</span>
               <el-button size="small" type="primary" plain @click="copy(s.link)">复制分享链接</el-button>
+              <el-button size="small" type="primary" @click="openLink(s.link)">打开链接</el-button>
+              <el-button size="small" @click="openLink(s.link)">模拟扫码进入</el-button>
             </div>
           </div>
         </el-card>
@@ -65,8 +67,20 @@ const training = useTrainingStore()
 const visible = ref(false)
 const form = reactive<{ type: TeachingShare['type']; title: string }>({ type: '快速', title: '' })
 
+function absoluteLink(link: string) {
+  if (link.startsWith('http://') || link.startsWith('https://')) return link
+  if (typeof window !== 'undefined') {
+    return `${window.location.origin}${link.startsWith('/') ? link : `/${link}`}`
+  }
+  return link
+}
+
 function qrUrl(link: string) {
-  return `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(link)}`
+  return `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(absoluteLink(link))}`
+}
+
+function openLink(link: string) {
+  window.open(link, '_blank')
 }
 
 function save() {
@@ -77,11 +91,12 @@ function save() {
 }
 
 async function copy(link: string) {
+  const text = absoluteLink(link)
   try {
-    await navigator.clipboard?.writeText(link)
+    await navigator.clipboard?.writeText(text)
     ElMessage.success('分享链接已复制')
   } catch {
-    ElMessage.success(`链接：${link}`)
+    ElMessage.success(`链接：${text}`)
   }
 }
 </script>
@@ -112,5 +127,6 @@ async function copy(link: string) {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  align-items: flex-start;
 }
 </style>

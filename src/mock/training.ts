@@ -301,9 +301,9 @@ export const contactGroups: ContactGroup[] = [
 ]
 
 export const teachingShares: TeachingShare[] = [
-  { id: 'ts1', type: '快速', title: '今日对刀指导', link: 'https://lab.local/join/QK-8821', qrHint: '扫码加入快速指导', expire: '今日 22:00' },
-  { id: 'ts2', type: '预约', title: '周四晚答疑', link: 'https://lab.local/join/YY-3390', qrHint: '扫码预约答疑时段', expire: '2026-09-18 21:00' },
-  { id: 'ts3', type: '长期', title: '数控课程常驻教室', link: 'https://lab.local/join/CQ-1102', qrHint: '学期有效长期入口', expire: '2026-12-31' },
+  { id: 'ts1', type: '快速', title: '今日对刀指导', link: '/join/QK-8821', qrHint: '扫码加入快速指导', expire: '今日 22:00' },
+  { id: 'ts2', type: '预约', title: '周四晚答疑', link: '/join/YY-3390', qrHint: '扫码预约答疑时段', expire: '2026-09-18 21:00' },
+  { id: 'ts3', type: '长期', title: '数控课程常驻教室', link: '/join/CQ-1102', qrHint: '学期有效长期入口', expire: '2026-12-31' },
 ]
 
 export const aiScoreBuiltin = {
